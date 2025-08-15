@@ -59,8 +59,8 @@ mongoose
     useUnifiedTopology: true
   })
   .then(() => {
-    console.log("Conected to the Database");
+    console.log("Conected to the Database.");
   })
   .catch(() => {
-    console.log("Conection with the Dtabase failed");
+    console.log("Conection with the Dtabase failed.");
   });
