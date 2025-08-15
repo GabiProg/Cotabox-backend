@@ -13,7 +13,6 @@ app.get("/participation", async (req, res) => {
     const participations = await Participation.find({});
     res.status(200).json(participations);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
@@ -29,7 +28,6 @@ app.post("/participation", async (req, res) => {
     const participation = await Participation.create(req.body);
     res.status(201).json(participation);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
@@ -49,12 +47,17 @@ app.delete("/participation/:id", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => {
     console.log("Conected to the Database");
   })
